@@ -26,7 +26,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aashish Rana — Full Stack Engineer",
+  title: "Aashish Rana Full Stack Developer",
   description:
     "Full Stack Software Engineer skilled in React.js, Next.js, Node.js, TypeScript, PostgreSQL, MongoDB. Building production-ready SaaS products, AI-powered applications, and database-driven systems.",
   keywords: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Aashish Rana" }],
   openGraph: {
-    title: "Aashish Rana — Full Stack Engineer",
+    title: "Aashish Rana Full Stack Developer",
     description: "Building production-ready SaaS products, AI-powered applications, and database-driven systems.",
     type: "website",
   },
