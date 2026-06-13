@@ -85,7 +85,7 @@ export default function Projects() {
   const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="projects" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative">
+    <section id="projects" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative overflow-hidden">
       <div className="orb orb-pink w-[350px] h-[350px] top-20 right-[-50px]" />
 
       <div className="max-w-6xl mx-auto">

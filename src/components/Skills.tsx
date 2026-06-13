@@ -51,7 +51,7 @@ export default function Skills() {
   const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="skills" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative">
+    <section id="skills" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative overflow-hidden">
       <div className="orb orb-cyan w-[400px] h-[400px] bottom-0 left-[-100px]" />
 
       <div className="max-w-6xl mx-auto">

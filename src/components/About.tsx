@@ -8,7 +8,7 @@ export default function About() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="about" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative">
+    <section id="about" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative overflow-hidden">
       {/* Orb */}
       <div className="orb orb-purple w-[350px] h-[350px] top-10 right-0 opacity-8" />
 

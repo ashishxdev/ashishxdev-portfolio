@@ -7,7 +7,7 @@ export default function Education() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="education" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative">
+    <section id="education" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative overflow-hidden">
       <div className="orb orb-purple w-[300px] h-[300px] bottom-10 right-10" />
 
       <div className="max-w-6xl mx-auto">

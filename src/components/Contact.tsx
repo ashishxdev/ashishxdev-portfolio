@@ -51,7 +51,7 @@ export default function Contact() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="contact" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative">
+    <section id="contact" ref={ref} className="py-20 sm:py-28 px-4 sm:px-6 relative overflow-hidden">
       <div className="orb orb-cyan w-[400px] h-[400px] top-0 right-[-100px]" />
       <div className="orb orb-purple w-[300px] h-[300px] bottom-0 left-[-80px]" />
 
