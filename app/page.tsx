@@ -302,7 +302,7 @@ export default function Home() {
             >
               Hi, I&apos;m Aashish -{" "}
               <span className="font-semibold text-[var(--muted)]">
-                A Full Stack Developer.
+                AI Full Stack Developer.
               </span>
             </h1>
             <p className="mt-7 max-w-[820px] text-base leading-[1.78] text-[var(--muted)] md:text-lg">

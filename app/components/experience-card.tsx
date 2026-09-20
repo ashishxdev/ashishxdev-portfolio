@@ -191,7 +191,7 @@ export function ExperienceCard({ experience }: { experience: Experience }) {
         </div>
       </div>
 
-      <ul className="list-outside list-disc space-y-1 pl-5 text-justify text-[var(--muted)] [text-align-last:left] [text-justify:inter-character] marker:text-[var(--ink)]">
+      <ul className="list-outside list-disc space-y-1 pl-5 text-justify text-[var(--muted)] marker:text-[var(--ink)] [text-align-last:left] md:[text-justify:inter-character]">
         {experience.description.map((description) => (
           <li className="pl-1 leading-7" key={description}>
             {formatDescription(description)}
