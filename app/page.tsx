@@ -307,8 +307,8 @@ export default function Home() {
             </h1>
             <p className="mt-7 max-w-[820px] text-base leading-[1.78] text-[var(--muted)] md:text-lg">
               I build production ready web products using{" "}
-              <Skill href="https://www.typescriptlang.org/" name="TypeScript">
-                <TypeScriptIcon />
+              <Skill href="https://www.javascriptlang.org/" name="JavaScript">
+                <JavaScriptIcon />
               </Skill>
               ,{" "}
               <Skill href="https://nextjs.org/" name="Next.js">
