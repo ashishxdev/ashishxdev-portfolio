@@ -78,7 +78,7 @@ export default function ProjectsPage() {
           <div className="flex flex-col">
             {projects.map((project, index) => (
               <div key={project.number}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} priority={index === 0} />
                 {index < projects.length - 1 && (
                   <hr className="my-8 border-0 border-t border-[var(--line)]" />
                 )}

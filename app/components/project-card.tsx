@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import { ImageLightbox } from "./image-lightbox";
 
 export type Project = {
   number: string;
@@ -36,66 +40,107 @@ function GithubIcon() {
   );
 }
 
-export function ProjectCard({ project }: { project: Project }) {
+function ZoomIcon() {
   return (
-    <article className="group grid overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] shadow-[var(--shadow)] md:grid-cols-[minmax(260px,0.42fr)_1fr]">
-      <div className="relative grid min-h-[240px] place-items-center overflow-hidden border-b border-[var(--line)] bg-[#10131d] md:min-h-[320px] md:border-r md:border-b-0">
-        <Image
-          src={project.image}
-          alt={project.imageAlt}
-          fill
-          sizes="(min-width: 768px) 40vw, 100vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
-        />
-        <span className="absolute top-5 left-5 z-[2] rounded-md bg-white/85 px-2 py-1 text-xs font-extrabold tracking-[0.14em] text-[#1b1c18] backdrop-blur">
-          {project.number}
-        </span>
-      </div>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
+      <path
+        d="M9 11h4M11 9v4M20 20l-3.5-3.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
-      <div className="flex flex-col justify-center p-6 md:p-9">
-        <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] leading-tight font-bold tracking-[-0.045em]">
-          {project.title}
-        </h2>
-        <div className="mt-4 w-full space-y-2 text-justify text-[var(--muted)] [text-align-last:left] [text-justify:inter-character]">
-          {project.description.map((description) => (
-            <p className="leading-7" key={description}>
-              {description}
-            </p>
-          ))}
-        </div>
+export function ProjectCard({ project, priority = false }: { project: Project; priority?: boolean }) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span
-              className="rounded-md border border-dashed border-[color-mix(in_srgb,var(--ink)_20%,transparent)] bg-[color-mix(in_srgb,var(--ink)_5%,transparent)] px-2.5 py-1.5 text-xs font-bold text-[var(--ink)]"
-              key={tag}
-            >
-              {tag}
+  return (
+    <>
+      <article className="group grid overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] shadow-[var(--shadow)] md:grid-cols-[minmax(260px,0.42fr)_1fr]">
+        {/* Clickable image panel */}
+        <button
+          type="button"
+          aria-label={`View full image: ${project.imageAlt}`}
+          onClick={() => setLightboxOpen(true)}
+          className="relative grid min-h-[240px] w-full place-items-center overflow-hidden border-b border-[var(--line)] bg-[#10131d] text-left md:min-h-[320px] md:border-r md:border-b-0 cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]"
+        >
+          <Image
+            src={project.image}
+            alt={project.imageAlt}
+            fill
+            sizes="(min-width: 768px) 40vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+          />
+          <span className="absolute top-5 left-5 z-[2] rounded-md bg-white/85 px-2 py-1 text-xs font-extrabold tracking-[0.14em] text-[#1b1c18] backdrop-blur">
+            {project.number}
+          </span>
+
+          {/* Zoom hint overlay */}
+          <span className="absolute inset-0 z-[2] flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/30">
+            <span className="flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-[#1b1c18] opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100 [&_svg]:size-3.5">
+              <ZoomIcon /> View image
             </span>
-          ))}
-        </div>
+          </span>
+        </button>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-[var(--line)] pt-5 [&_svg]:size-[15px]">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--paper)] px-3.5 py-2 text-xs text-[var(--ink)] transition-transform hover:-translate-y-0.5 hover:border-[var(--ink)]"
-          >
-            Live <ExternalIcon />
-          </a>
-          {project.githubUrl && (
+        <div className="flex flex-col justify-center p-6 md:p-9">
+          <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] leading-tight font-bold tracking-[-0.045em]">
+            {project.title}
+          </h2>
+          <div className="mt-4 w-full space-y-2 text-justify text-[var(--muted)] [text-align-last:left] [text-justify:inter-character]">
+            {project.description.map((description) => (
+              <p className="leading-7" key={description}>
+                {description}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                className="rounded-md border border-dashed border-[color-mix(in_srgb,var(--ink)_20%,transparent)] bg-[color-mix(in_srgb,var(--ink)_5%,transparent)] px-2.5 py-1.5 text-xs font-bold text-[var(--ink)]"
+                key={tag}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-[var(--line)] pt-5 [&_svg]:size-[15px]">
             <a
-              href={project.githubUrl}
+              href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--paper)] px-3.5 py-2 text-xs text-[var(--ink)] transition-transform hover:-translate-y-0.5 hover:border-[var(--ink)]"
             >
-              GitHub <GithubIcon />
+              Live <ExternalIcon />
             </a>
-          )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--paper)] px-3.5 py-2 text-xs text-[var(--ink)] transition-transform hover:-translate-y-0.5 hover:border-[var(--ink)]"
+              >
+                GitHub <GithubIcon />
+              </a>
+            )}
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+
+      {lightboxOpen && (
+        <ImageLightbox
+          src={project.image}
+          alt={project.imageAlt}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
+    </>
   );
 }
